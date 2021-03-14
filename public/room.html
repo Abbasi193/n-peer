@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/css1.css">
+
+  <script defer src="js/peer.js"></script>
+  <script defer src="js/jquery.js"></script>
+  <script src="js/socketio.js" defer></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/script2.js" defer></script>
+  <title>Document</title>
+  <style>
+    /* #video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 1300px);
+      grid-auto-rows: 700px;
+    } */
+
+    video {
+      width: 300px;
+      height: 200px;
+    }
+    .container {
+      width: 300px;
+      float: left;
+    }
+    #video-grid ,.fullsizeVideo{
+      width: 900px;
+      height: 500px;
+    }
+    
+    
+    .hidden {
+      display: none;
+    }
+    .scroll{
+      height: 500px;
+      overflow-y:scroll;
+    }
+    body {
+      height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="w3-center">
+    <h1>n - Peer </h1>
+    <p>Fastest communication app</p>
+  </div>
+  
+
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'home')" id="defaultOpen">Home</button>
+    <!-- <button class="tablinks" onclick="openCity(event, 'new-message-box')">new-message-box</button> -->
+    <button class="tablinks" onclick="openCity(event, 'people')">People</button>
+    <button class="tablinks" onclick="openCity(event, 'chat')">Chat</button>
+    <button class="tablinks" onclick="openCity(event, 'files')">Files</button>
+    <button class="tablinks" onclick="openCity(event, 'group-creation-box')">New Group </button>
+    <button class="tablinks" onclick="openCity(event, 'group-outer-box')">Groups</button>
+  </div>
+
+  <div class='tabcontent' id="home"></div>
+  <!-- <div class='tabcontent' id="new-message-box"></div> -->
+
+  <div class='tabcontent scroll' id='people'></div>
+
+  <div class='tabcontent w3-row' id='chat'>
+    <div id='people-chat' class="w3-half scroll"></div>
+    <div class="w3-half hidden" id="chat-box-container">
+      <div id="message-box" class="scroll"></div>
+      <input type="input" id="message-input">
+      <input type="button" value="Send Message" onclick="sendMessage()">
+    </div>
+    
+  </div>
+
+  <div class='tabcontent w3-row' id='files'>
+    <div id='people-file' class="w3-half scroll"></div>
+    <div class="w3-half hidden" id="file-box-container">
+      <div id="file-box" class="scroll"></div>
+      <form action="" method='POST' enctype='multipart/form-data'>
+        <input type="file" id="file" name="upload" /> 
+        <input type="button" id="file-button" value="Upload"> 
+      </form>
+    </div>
+  </div>
+
+  <div class='tabcontent' id='group-creation-box'>
+    <div class="w3-half">
+      Group name
+      <input type="input" id="group-name-input">
+      <input type="button" value="Create Group" onclick="createGroup()">
+      <div id='group-people'></div>
+      <div id='people-list'  class="scroll"></div>
+    </div>
+  </div>
+
+  <div class='tabcontent w3-row' id="group-outer-box">
+    <div class='w3-half scroll' id="group-box">
+    </div>
+
+    <div class="w3-half">
+      <div id="group-member-box" class="hidden"></div>
+
+      <div id="group-message-box-outer" class="hidden">
+        <div id="group-message-box" class="scroll"></div>
+        <input type="input" id="group-message-input">
+        <input type="button" value="Send Message" onclick="sendGroupMessage()">
+      </div>
+      
+      <div id="group-file-box-outer" class="hidden">
+        <div id="group-file-box" class="scroll"></div>
+        <form action="" method='POST' enctype='multipart/form-data'>
+          <input type="file" id="group-file" name="upload" /> 
+          <input type="button" id="group-file-button" value="Upload">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="video-container" class="w3-modal">
+    <div class="w3-modal-content">
+      <div  id="video-grid"></div>
+      <input type="button" value="Stop Video" onclick="stopVideo()">
+      <input type="button" value="Stop Audio" onclick="stopAudio()">
+      <input type="button" id="screen" value="Share Screen" onclick="shareScreen()">
+      <input type="button" id="screen" value="End Meeting" onclick="window.location.assign('/')">
+    </div>
+  </div>
+
+  <div id="fullsize-video-container" class="w3-modal">
+    <span class="w3-text-white w3-xxlarge w3-hover-text-grey w3-container w3-display-topright" onclick="closeFullSizeVideo()" style="cursor:pointer">×</span>
+    <div id='fullsize-video-container-content' class="w3-modal-content">
+      
+    </div>
+  </div>
+
+</body>
+
+</html>

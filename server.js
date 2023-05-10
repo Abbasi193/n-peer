@@ -260,7 +260,7 @@ app.get('/userfiles', auth, async (req, res) => {
 })
 
 app.post('/upload', auth, (req, res) => {
-    
+
     var userId = req.user.id
     var file = req.files.file;
     var filename = file.name;
@@ -272,13 +272,13 @@ app.post('/upload', auth, (req, res) => {
         else {
             try {
                 if (type === 'individual') {
-                    await File.create({ name:filename, type, recipient, sender: userId })
+                    await File.create({ name: filename, type, recipient, sender: userId })
                     res.send('Uploaded');
                 }
                 else if (type === 'group') {
                     var inGroup = await Join.findOne({ userId, groupId: recipient });
                     if (!inGroup) throw Error("User is not in group");
-                    await File.create({ name:filename, type, recipient, sender: userId })
+                    await File.create({ name: filename, type, recipient, sender: userId })
                     res.send('Uploaded');
                 }
             } catch (e) {

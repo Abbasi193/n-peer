@@ -1,4 +1,4 @@
-name: Security Scan Node.js
+name: Security Scan Synk
 
 on: [push]
 

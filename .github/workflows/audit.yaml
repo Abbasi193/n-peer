@@ -1,4 +1,4 @@
-name: Node.js Security Audit
+name: Dependency Audit
 
 on: [push]
 

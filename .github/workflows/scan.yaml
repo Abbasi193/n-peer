@@ -10,6 +10,9 @@ jobs:
       - name: Run Snyk Security Check
         run: snyk auth $SNYK_TOKEN
 
+      - name: Run Snyk Security Check
+        run: snyk test
+
         uses: snyk/actions/node@master
         with:
           json: true

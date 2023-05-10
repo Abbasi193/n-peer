@@ -1,31 +1,35 @@
-name: Security Pipeline
+name: Security Scan Node.js
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '0 0 * * *'
+on: [push]
 
+env:
+  SNYK_TOKEN: ${{ secrets.SNYK_API_KEY }}
+  
 jobs:
-  snyk:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - run: npm install
-      - name: Install Snyk
-        run: |
-          curl -L https://github.com/snyk/snyk/releases/download/v1.746.0/snyk-linux -o snyk
-          chmod +x snyk
-      - name: Run Snyk Security Check
-        run: snyk auth $SNYK_TOKEN
-        run: echo $SNYK_TOKEN
+    - uses: actions/checkout@v2
 
-      - name: Run Snyk Security Check
-        run: snyk code test
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
 
-      - name: Run Snyk
-        run: ./snyk test
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_API_KEY }}
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Install Snyk
+      run: npm install -g snyk
+
+    - name: Snyk Auth
+      run: snyk auth $SNYK_TOKEN
+
+    - name: Snyk security scan
+      run: snyk test
+
+    - name: Snyk monitor
+      run: snyk monitor
+

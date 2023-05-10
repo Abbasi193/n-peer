@@ -1,20 +1,31 @@
-name: Example workflow using Snyk
-on: pull_request
+name: Security Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'
+
 jobs:
-  security:
+  snyk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-
+      - uses: actions/checkout@v2
+      - run: npm install
+      - name: Install Snyk
+        run: |
+          curl -L https://github.com/snyk/snyk/releases/download/v1.746.0/snyk-linux -o snyk
+          chmod +x snyk
       - name: Run Snyk Security Check
         run: snyk auth $SNYK_TOKEN
         run: echo $SNYK_TOKEN
+
       - name: Run Snyk Security Check
         run: snyk code test
 
-        uses: snyk/actions/node@master
-        with:
-          json: true
+      - name: Run Snyk
+        run: ./snyk test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_API_KEY }}

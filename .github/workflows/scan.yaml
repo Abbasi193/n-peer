@@ -11,7 +11,9 @@ jobs:
         run: snyk auth $SNYK_TOKEN
 
         uses: snyk/actions/node@master
+        with:
+          command: test
+          args: --severity-threshold=high
+          json: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        inputs:
-          json: true

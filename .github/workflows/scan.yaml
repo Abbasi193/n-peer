@@ -9,7 +9,9 @@ jobs:
 
       - name: Run Snyk Security Check
         run: snyk auth $SNYK_TOKEN
-        
+
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        inputs:
+          json: true

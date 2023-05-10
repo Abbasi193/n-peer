@@ -9,9 +9,9 @@ jobs:
 
       - name: Run Snyk Security Check
         run: snyk auth $SNYK_TOKEN
-
+        run: echo $SNYK_TOKEN
       - name: Run Snyk Security Check
-        run: snyk test
+        run: snyk code test
 
         uses: snyk/actions/node@master
         with:

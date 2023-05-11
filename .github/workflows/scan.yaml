@@ -27,8 +27,11 @@ jobs:
     - name: Snyk Auth
       run: snyk auth $SNYK_TOKEN
 
-    - name: Snyk security scan
+    - name: Snyk Dependency scan
       run: snyk test
+    
+    - name: Snyk Code scan
+      run: snyk code test
 
     - name: Snyk monitor
       run: snyk monitor

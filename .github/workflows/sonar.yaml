@@ -20,11 +20,8 @@ jobs:
       with:
         node-version: '14.x'
 
-    - name: Install SonarScanner
-      run: |
-        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-        unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-        export PATH=$PATH:/path/to/sonar-scanner-cli-4.6.2.2472-linux/bin/
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v3
 
     - name: Install dependencies
       run: npm install

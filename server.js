@@ -21,7 +21,7 @@ const peerServer = ExpressPeerServer(server, {
     debug: true,
     path: '/'
 });
-let count = 3
+let count = 5
 const upload = require('express-fileupload')
 const auth = require('./middleware/auth');
 

@@ -1,6 +1,6 @@
 name: Security Scan Synk
 
-on: [push]
+on: [pull_request]
 
 env:
   SNYK_TOKEN: ${{ secrets.SNYK_API_KEY }}

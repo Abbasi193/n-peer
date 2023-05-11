@@ -3,7 +3,7 @@ name: Dependency Audit
 on: [push]
 
 jobs:
-  build:
+  security:
 
     runs-on: ubuntu-latest
 

@@ -31,7 +31,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         sonar-scanner \
-          -Dsonar.projectKey=my-project \
-          -Dsonar.sources=src \
+          -Dsonar.projectKey=auth \
+          -Dsonar.sources=.
           -Dsonar.host.url=http://localhost:9000 \
           -Dsonar.login=${{ env.SONAR_TOKEN }}

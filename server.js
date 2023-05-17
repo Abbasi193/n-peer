@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 var cookieParser = require('cookie-parser')
 const { ExpressPeerServer } = require('peer');
 const app = express()
+
 const server = http.createServer(app)
 const io = require('socket.io')(server)
 const JWT_SECRET = PROCESS.ENV.SECRET;
